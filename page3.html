@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="styles.css">
+      </head>
+<body>
+
+    <h3>Step 3 : Your results</h3>
+    <p>You have calculated the area of a <span id="calFor" class="bold"></span>, 
+        with values 
+        <span id="firstText" class="bold"></span>,
+        <span id="secondText" class="bold"></span>. 
+        Below is your result.</p>
+    <p id="result"></p>
+    <a href="page1.html" class="">Start Over</a>
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+
+        window.addEventListener('load', function() {
+
+            let calFor = localStorage.getItem("calFor");
+            let firstText = localStorage.getItem("firstText");
+            let secondText = localStorage.getItem("secondText");
+            console.log("calFor : " + calFor);
+            console.log("firstText : " + firstText);
+            console.log("secondText : " + secondText);
+            
+            document.getElementById("calFor").innerHTML = calFor;
+            document.getElementById("firstText").innerHTML = firstText;
+            document.getElementById("secondText").innerHTML = secondText;
+
+            // Module Pattern 
+            // area of rectangle, circle, square, ellipse
+            const calculator = (() => {
+                const pi = 3.142;
+                const rectangle = (a, b) => a * b;
+                const ellipse = (a, b) => pi * a * b;
+                const square = (a) => a * a; // s = a;
+                const circle = (a) => pi * a * a; // r = a;
+                return {
+                    rectangle,
+                    ellipse,
+                    square,
+                    circle, 
+            };
+            })();
+
+            let result = 0;
+
+            if(calFor == "rectangle"){
+                const areaOfRectangle = calculator.rectangle(firstText, secondText);
+                console.log("areaOfRectangle: " + areaOfRectangle);
+                result = areaOfRectangle;
+            }else if(calFor == "ellipse"){
+                const areaOfEllipse = calculator.ellipse(firstText, secondText);
+                console.log("areaOfEllipse: " + areaOfEllipse);
+                result = areaOfEllipse;
+            }else if(calFor == "square"){
+                const areaOfSquare = calculator.square(firstText);
+                console.log("areaOfSquare: " + areaOfSquare);
+                result = areaOfSquare;
+            }else{
+                const areaOfCircle = calculator.circle(firstText);
+                console.log("areaOfCircle: " + areaOfCircle);
+                result = areaOfCircle;
+            }
+
+            document.getElementById("result").innerHTML = "The result is " + result;
+            
+        })
+
+            
+    </script>
+
+</body>
+</html> 

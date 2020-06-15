@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="styles.css">
+      </head>
+<body>
+
+    <h3>Step 2 : Insert your values</h3>
+    <p>You have selected a <span id="calFor" class="bold"></span>, please input the required variables.</p>
+    
+    <div><label>Value 1: </label><input type="text" id="firstText" name="firstText" size="20" ></div>
+    <div id="loadInput"></div>
+    <button type="button" onclick="getValues()"> 
+        Go to step 3 
+    </button> 
+    <a href="page1.html" class="">Cancel</a>
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+
+        window.addEventListener('load', function() {
+            let calFor = localStorage.getItem("calFor");
+            console.log("calFor : "  + calFor);
+            document.getElementById("calFor").innerHTML = calFor;
+
+            const loadInput = document.getElementById('loadInput');
+            if(calFor == "rectangle" || calFor == "ellipse"){
+                var label = document.createElement("LABEL");
+                var t = document.createTextNode("Value 2: ");
+                label.appendChild(t);
+                loadInput.append(label);
+
+                var input = document.createElement("INPUT");
+                input.setAttribute("type", "text");
+                input.setAttribute("id", "secondText");
+                input.setAttribute("name", "secondText");
+                input.setAttribute("size", "20");
+                loadInput.append(input);
+            }
+        })
+        
+        
+        function getValues() { 
+            var firstText = document.getElementById("firstText").value;
+            localStorage.setItem("firstText", firstText);
+
+            if(document.getElementById("secondText") !== null){
+                var secondText = document.getElementById("secondText").value;
+                localStorage.setItem("secondText", secondText);
+            }
+            
+            window.location.href = "page3.html";
+        } 
+    </script>
+
+</body>
+</html> 
